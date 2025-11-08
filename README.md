@@ -1,4 +1,4 @@
-# 🛍️ Hanger - Next.js E-commerce
+# 🛍️ BuyBest - Next.js E-commerce
 
 A modern e-commerce application built with Next.js, TypeScript, and Tailwind CSS.
 
@@ -27,7 +27,7 @@ A modern e-commerce application built with Next.js, TypeScript, and Tailwind CSS
 
 ```bash
 git clone <repo-url>
-cd hanger
+cd BuyBest
 pnpm install
 pnpm dev
 ```
