@@ -1,0 +1,5 @@
+export const API_CONFIG = {
+  DEFAULT_LIMIT: 10,
+  INTERSECTION_THRESHOLD: 1.0,
+  AUTH_DELAY: 1000,
+} as const;
