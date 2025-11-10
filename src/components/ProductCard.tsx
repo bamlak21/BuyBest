@@ -102,7 +102,7 @@ export function ProductCard({
                 <Button
                   variant="secondary"
                   size="sm"
-                  className="flex-1 bg-white/95 hover:bg-white backdrop-blur-sm rounded-lg shadow-lg font-medium text-xs"
+                  className="flex-1 bg-white/95 hover:bg-white backdrop-blur-sm rounded-lg shadow-lg font-medium text-xs text-black"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();

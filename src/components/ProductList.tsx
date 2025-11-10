@@ -66,7 +66,11 @@ export function ProductList() {
         if (query) {
           response = await productApi.searchProducts(query, limit, currentSkip);
         } else if (category) {
-          response = await productApi.getProductsByCategory(category, limit, currentSkip);
+          response = await productApi.getProductsByCategory(
+            category,
+            limit,
+            currentSkip
+          );
         } else {
           response = await productApi.getProducts(limit, currentSkip);
         }
@@ -158,7 +162,6 @@ export function ProductList() {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      
       {/* Search and Filter Section */}
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -205,10 +208,10 @@ export function ProductList() {
         {showFilters && (
           <div className="bg-muted/30 rounded-lg p-4 border border-border/50">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-foreground">Categories</h3>
-              {categoriesLoading && (
-                <LoadingSpinner size="sm" />
-              )}
+              <h3 className="text-sm font-semibold text-foreground">
+                Categories
+              </h3>
+              {categoriesLoading && <LoadingSpinner size="sm" />}
             </div>
             <div className="flex flex-wrap gap-2">
               <Button
@@ -219,23 +222,26 @@ export function ProductList() {
               >
                 All Products
               </Button>
-              {!categoriesLoading && categories && categories.map((category, index) => (
-                <Button
-                  key={category.slug || `${category.name}-${index}`}
-                  variant={selectedCategory === category.slug ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => handleCategoryChange(category.slug)}
-                  className="text-xs capitalize"
-                >
-                  {category.name}
-                </Button>
-              ))}
+              {!categoriesLoading &&
+                categories &&
+                categories.map((category, index) => (
+                  <Button
+                    key={category.slug || `${category.name}-${index}`}
+                    variant={
+                      selectedCategory === category.slug ? "default" : "outline"
+                    }
+                    size="sm"
+                    onClick={() => handleCategoryChange(category.slug)}
+                    className="text-xs capitalize"
+                  >
+                    {category.name}
+                  </Button>
+                ))}
             </div>
           </div>
         )}
       </div>
 
-      
       <div className="grid grid-cols-1 max-[475px]:grid-cols-1 max-[640px]:grid-cols-2 max-[768px]:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
         {loading && products.length === 0
           ? Array.from({ length: 8 }).map((_, index) => (
@@ -251,12 +257,13 @@ export function ProductList() {
             ))}
       </div>
 
-      
       {loading && products.length === 0 && (
         <div className="flex justify-center py-12 sm:py-16">
           <div className="flex flex-col items-center gap-3">
             <LoadingSpinner size="lg" />
-            <p className="text-sm sm:text-base text-muted-foreground">Loading products...</p>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              Loading products...
+            </p>
           </div>
         </div>
       )}
@@ -278,19 +285,14 @@ export function ProductList() {
       {!loading && !hasMore && products.length === 0 && (
         <div className="text-center py-12 sm:py-16">
           <p className="text-sm sm:text-base text-muted-foreground">
-            {searchQuery 
+            {searchQuery
               ? `No products found for "${searchQuery}"`
               : selectedCategory
               ? `No products found in "${selectedCategory}"`
-              : "No products found"
-            }
+              : "No products found"}
           </p>
           {(searchQuery || selectedCategory) && (
-            <Button
-              variant="outline"
-              onClick={clearFilters}
-              className="mt-4"
-            >
+            <Button variant="outline" onClick={clearFilters} className="mt-4">
               Clear Filters
             </Button>
           )}
