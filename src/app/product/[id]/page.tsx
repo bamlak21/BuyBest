@@ -131,7 +131,7 @@ return (
               {isAuthenticated && (
                 <>
                   <Link href={`/product/${product.id}/edit`}>
-                    <Button variant="secondary" size="sm" className="text-black">
+                    <Button variant="secondary" size="sm" className="text-black dark:text-white">
                       <Edit className="h-4 w-4" />
                       <span className="hidden sm:inline ml-2">Edit</span>
                     </Button>
