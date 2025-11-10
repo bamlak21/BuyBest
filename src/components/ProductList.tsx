@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Product, Category } from "../types/product";
 import { productApi } from "../lib/api";
 import { ProductCard } from "./ProductCard";
+import { ProductCardSkeleton } from "./ProductCardSkeleton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2, Search, X, Filter } from "lucide-react";
@@ -236,14 +237,18 @@ export function ProductList() {
 
       
       <div className="grid grid-cols-1 max-[475px]:grid-cols-1 max-[640px]:grid-cols-2 max-[768px]:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onDelete={handleDelete}
-            showActions={isAuthenticated}
-          />
-        ))}
+        {loading && products.length === 0
+          ? Array.from({ length: 8 }).map((_, index) => (
+              <ProductCardSkeleton key={`skeleton-${index}`} />
+            ))
+          : products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onDelete={handleDelete}
+                showActions={isAuthenticated}
+              />
+            ))}
       </div>
 
       

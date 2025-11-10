@@ -12,6 +12,7 @@ import { showSuccessToast } from "../lib/toast";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { LoadingSpinner } from "./ui/loading-spinner";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ProductCardProps {
   product: Product;
@@ -56,10 +57,11 @@ export function ProductCard({
       <Card className="w-full group relative overflow-hidden bg-gradient-to-br p-0 from-card to-card/80 border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
         <Link href={`/product/${product.id}`} className="block">
           <div className="relative w-full pt-[100%] overflow-hidden rounded-t-lg bg-muted/30">
-            <img
+            <Image
               src={product.thumbnail}
               alt={product.title}
-              className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+              fill
+              className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
             />
 
             {/* Gradient overlay on hover */}

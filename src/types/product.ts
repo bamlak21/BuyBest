@@ -22,8 +22,8 @@ export interface ProductsResponse {
 export interface CreateProductRequest {
   title: string;
   description: string;
-  price: number;
-  stock: number;
+  price: number | string;
+  stock: number | string;
   brand: string;
   category: string;
 }

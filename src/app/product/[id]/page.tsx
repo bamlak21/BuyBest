@@ -15,6 +15,7 @@ import { ConfirmDialog } from '../../../components/ConfirmDialog';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Check } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ProductDetail() {
   const [product, setProduct] = useState<Product | null>(null);
@@ -41,6 +42,8 @@ export default function ProductDetail() {
         setLoading(true);
         const data = await productApi.getProductById(productId);
         setProduct(data);
+        // Set main image to first image from the images array, fallback to thumbnail
+        setMainImage(data.images && data.images.length > 0 ? data.images[0] : data.thumbnail);
       } catch (err) {
         setError('Failed to load product');
         console.error('Error loading product:', err);
@@ -164,10 +167,11 @@ return (
           
           <div className="md:col-span-1 lg:col-span-3 space-y-4 md:space-y-6">
             <div className="aspect-square relative overflow-hidden rounded-xl border bg-muted/50">
-              <img
+              <Image
                 src={mainImage || product.thumbnail}
                 alt={product.title}
-                className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                fill
+                className="object-cover transition-transform hover:scale-105 duration-300"
               />
             </div>
             
@@ -180,10 +184,11 @@ return (
                     <div key={index} className={`aspect-square relative overflow-hidden rounded-lg border-2 group cursor-pointer transition-colors ${
                       mainImage === image ? 'border-primary' : 'border-transparent hover:border-muted-foreground'
                     }`} onClick={() => handleImageClick(image)}>
-                      <img
+                      <Image
                         src={image}
                         alt={`${product.title} - Image ${index + 1}`}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
                         <div className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

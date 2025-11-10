@@ -17,7 +17,7 @@ import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("admin@example.com");
-  const [password, setPassword] = useState("password123");
+  const [password, setPassword] = useState("admin123");
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
